@@ -34,5 +34,16 @@ class MovieCategory(ListView):
         return Movie.objects.filter(category=self.category)
     def get_context_data(self, *, object_list=None, **kwargs):
         context=super(MovieCategory,self).get_context_data(**kwargs)
-        context['category'] = self.category
+        context['movie_category'] = self.category
+        return context
+
+class MovieLanguage(ListView):
+    model = Movie
+    def get_queryset(self):
+        self.language=self.kwargs['language']
+        print(self.language)
+        return Movie.objects.filter(language=self.language)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context=super(MovieLanguage,self).get_context_data(**kwargs)
+        context['movie_language'] = self.language
         return context

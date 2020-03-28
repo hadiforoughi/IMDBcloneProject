@@ -2,9 +2,11 @@
 {% block body %}
     <main class="content">
         <section class="centered">
-            {% if category %}
-
-                <h3>{{ category }}</h3>
+            {% if movie_category %}
+                <h3>{{ movie_category| title }} movies</h3>
+            {% endif %}
+        {% if movie_language %}
+            <h3>{{ movie_language|title }} movies </h3>
         {% endif %}
             <div class="movies">
                 {% for movie in object_list %}
@@ -13,9 +15,9 @@
                             <img src="{{ movie.image.url }}">
                             <h2 class="movietitle">{{ movie.title }}</h2>
                         </a>
-
                     </div>
                 {% endfor %}
+
             </div>
             {% if is_paginated %}
                 <nav class="pagination">

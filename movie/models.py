@@ -10,8 +10,8 @@ CATEGORY_CHOICES=(
 )
 
 LANGUAGE_CHOICES=(
-    ("EN","English"),
-    ("Ge","Germany")
+    ("english","English"),
+    ("germany","Germany")
 )
 
 STATUS_CHOICES=(
@@ -30,7 +30,7 @@ class Movie(models.Model):
     viewcount =models.IntegerField(default=0)
     image= models.ImageField(upload_to='moviePic',blank=True)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=15,blank=True)
-    language=models.CharField(choices=LANGUAGE_CHOICES,max_length=2)
+    language=models.CharField(choices=LANGUAGE_CHOICES,max_length=15)
     yearOfProduction=models.DateField()
     status = models.CharField(choices=STATUS_CHOICES,max_length=2,blank=True)
     cast= models.CharField(max_length=100)
