@@ -3,10 +3,10 @@ from django.db import models
 # Create your models here.
 
 CATEGORY_CHOICES=(
-    ("A","Action"),
-    ("C","Comedy"),
-    ("D","Drama"),
-    ("R","Romance"),
+    ("action","Action"),
+    ("comedy","Comedy"),
+    ("drama","Drama"),
+    ("romance","Romance"),
 )
 
 LANGUAGE_CHOICES=(
@@ -19,16 +19,28 @@ STATUS_CHOICES=(
     ("MW","Most Watched"),
     ("TR","Top reted"),
 )
+TYPELINK_CHOICES=(
+    ("D","download"),
+    ("W","watch")
+)
 class Movie(models.Model):
 
     title= models.CharField(max_length=80)
     description = models.CharField(max_length=400)
     viewcount =models.IntegerField(default=0)
-    image= models.ImageField(upload_to='movie',blank=True)
-    category=models.CharField(choices=CATEGORY_CHOICES,max_length=1,blank=True)
+    image= models.ImageField(upload_to='moviePic',blank=True)
+    category=models.CharField(choices=CATEGORY_CHOICES,max_length=15,blank=True)
     language=models.CharField(choices=LANGUAGE_CHOICES,max_length=2)
     yearOfProduction=models.DateField()
     status = models.CharField(choices=STATUS_CHOICES,max_length=2,blank=True)
+    cast= models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
+
+class MovieLink(models.Model):
+    movie = models.ForeignKey(Movie,on_delete=models.CASCADE,related_name="movie_link")
+    type= models.CharField(choices=TYPELINK_CHOICES,max_length=1)
+    link= models.URLField()
+    def __str__(self):
+        return self.movie.title
