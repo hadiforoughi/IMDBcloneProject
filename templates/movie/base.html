@@ -59,8 +59,8 @@
                 </li>
             </ul>
         </nav>
-        <form class="search">
-            <input type="text" name="s" class="searchfield" placeholder="Search...">
+        <form class="search" method="get" action="{% url "movie:movie_search" %}">
+            <input type="text" name="query" value="{{ request.Get.q }}" class="searchfield" placeholder="Search...">
             <input type="submit" value="" class="searchsubmit">
         </form>
 
